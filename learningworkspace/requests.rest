@@ -1,0 +1,21 @@
+GET http://localhost:3000/post
+Authorization: : Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiTml0aW4iLCJpYXQiOjE1ODY1MjgzODAsImV4cCI6MTU4NjUyODM5NX0.MFpVWGHpawiXMAC4-yun266qnk1slRv98YzEx5QoZqw
+###
+POST http://localhost:4000/login 
+Content-Type: application/json
+
+{
+    "username" : "Nitin"
+}
+
+###
+POST http://localhost:3000/users
+Content-Type: application/json
+
+{
+    "name" : "Nitin Sharma",
+    "password": "Can you dig it sucker"
+}
+
+####
+GET  http://localhost:3000/getUser
