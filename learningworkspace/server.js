@@ -18,9 +18,12 @@ const posts = [
 const users = [];
 app.use(express.json());
 
-app.get("/post", authenticateToken, (req, res) => {
-  res.json(posts.filter((posts) => posts.name == req.user.name));
+app.get("/posts", (req, res) => {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.json(posts);
 });
+
+app.get("/post", authenticateToken, (req, res) => { res.json(posts.filter((posts => { posts.name == req.user.name }))) });
 
 app.get("/getUser", (req, res) => {
   res.json(users);
