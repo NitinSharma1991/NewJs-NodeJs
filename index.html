@@ -1,60 +1,122 @@
 <!DOCTYPE html>
 <html lang="en-US">
-
-<head>
-  <meta charset="utf-8">
-  <title>JavaScript label example</title>
-  <style>
-    p {
-      font-family: 'helvetica neue', helvetica, sans-serif;
-      letter-spacing: 1px;
-      text-transform: uppercase;
-      text-align: center;
-      border: 2px solid rgba(0, 0, 200, 0.6);
-      background: rgba(0, 0, 200, 0.3);
-      color: rgba(0, 0, 200, 0.6);
-      box-shadow: 1px 1px 2px rgba(0, 0, 200, 0.4);
-      border-radius: 10px;
-      padding: 3px 10px;
-      display: inline-block;
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <p>Player 1: Chris</p>
-  <button type="button" id="myBtn">click me</button>
-
-  <script>
-    // const para = document.querySelector('p');
-
-    // para.addEventListener('click', updateName);
-
-    // function updateName() {
-    //   let name = prompt('Enter a new name');
-    //   para.textContent = 'Player 1: ' + name;
-    // }
-    // // A function to display a message
-    // function sayHello() {
-    //   alert("Hello World!");
-    // }
-
-    // Call function on click of the button
-    let promise = async function main() {
-      try {
-        const api = await fetch("http://localhost:3000/post");
-        return api.json();
-      } catch (error) {
-        console.log(error.json());
+  <head>
+    <meta charset="utf-8" />
+    <title>JavaScript label example</title>
+    <style>
+      p {
+        font-family: "helvetica neue", helvetica, sans-serif;
+        letter-spacing: 1px;
+        text-transform: uppercase;
+        text-align: center;
+        border: 2px solid rgba(0, 0, 200, 0.6);
+        background: rgba(0, 0, 200, 0.3);
+        color: rgba(0, 0, 200, 0.6);
+        box-shadow: 1px 1px 2px rgba(0, 0, 200, 0.4);
+        border-radius: 10px;
+        padding: 3px 10px;
+        display: inline-block;
+        cursor: pointer;
       }
-    }
+    </style>
+  </head>
 
-    promise().then((message) => { console.log(message) });
-    document.getElementById("myBtn").onclick;
+  <body>
+    <p>Player 1: Chris</p>
+    <br />
+    <table>
+      <tr>
+        <td>
+          <button type="button" id="myBtn">click me</button>
+        </td>
+      </tr>
+    </table>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script>
+      // const para = document.querySelector('p');
 
+      // para.addEventListener('click', updateName);
 
-  </script>
-</body>
+      // function updateName() {
+      //   let name = prompt('Enter a new name');
+      //   para.textContent = 'Player 1: ' + name;
+      // }
+      // // A function to display a message
+      // function sayHello() {
+      //   alert("Hello World!");
+      // }
 
+      let promise = async function main() {
+        try {
+          const api = await fetch("http://localhost:3000/posts")
+            .then((response) => {
+              if (response.status == 200) return response.json();
+            })
+            .then((data) => {
+              console.log(data);
+              return data;
+            });
+        } catch (error) {
+          return error;
+          // console.log(error.json());
+        }
+      };
+        // promise()
+      //   .then((response) => {
+      //     console.log(response);
+      //   })
+      //   .catch((err) => {
+      //     console.log(err);
+      //   });
+
+      // document.getElementById("myBtn").onclick;
+      var query;
+
+      // Call function on click of the button
+      $(document).ready(function () {
+        $("#myBtn").click(function (e) {
+          var validate = Validate();
+          $("#message").html(validate);
+          if (validate.length == 0) {
+            $.ajax({
+              type: "GET",
+              url: "http://localhost:3000/posts",
+              dataType: "json",
+              success: function (result, status, xhr) {
+                return result;
+              },
+              error: function (xhr, status, error) {
+                alert(
+                  "Result: " +
+                    status +
+                    " " +
+                    error +
+                    " " +
+                    xhr.status +
+                    " " +
+                    xhr.statusText
+                );
+              },
+            });
+          }
+        });
+
+        // $(document).ajaxStart(function () {
+        //   $("img").show();
+        // });
+
+        // $(document).ajaxStop(function () {
+        //   $("img").hide();
+        // });
+
+        function Validate() {
+          var errorMessage = "";
+          if ($("#citySelect").val() == "Select") {
+            errorMessage += "► Select City";
+          }
+          return errorMessage;
+        }
+      });
+    </script>
+  </body>
 </html>

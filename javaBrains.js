@@ -44,5 +44,53 @@ let person = {
     isfromState: (state) => { return person.address.state === state; }
 
 };
+
 console.log(person.getFullName());
 console.log(person.isfromState("UC"));
+
+// scopes
+var number = 10;
+outer();
+
+function outer() {
+    var b = number;
+    console.log(b);
+    function inner() {
+        var b = 20;
+        var c = b;
+        console.log(c);
+    }
+    inner();
+}
+
+
+
+// date
+function setTimeZoneInCookie() {
+    var _myDate = new Date();
+    var _offset = _myDate.getTimezoneOffset();
+    // document.cookie = "TIMEZONE_COOKIE=" + _offset; //Cookie name with value
+
+    return _offset;
+}
+
+console.log(setTimeZoneInCookie());
+
+//closures
+var i;
+for (i = 0; i < 10; i++)
+    setTimeout(print, 1000, i);
+function print(i) {
+
+    console.log(i);
+}
+
+
+function obj(firstName, lastName) {
+    this.firstName = firstName;
+    this.lastName = lastName;
+}
+
+const obj1 = new obj("Nitin", "Sharma");
+
+console.log(obj1);
