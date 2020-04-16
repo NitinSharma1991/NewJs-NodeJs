@@ -1,7 +1,9 @@
 const fs = require("fs");
 const http = require("http");
 const events = require('events');
+
 const em =  new events.EventEmitter();
+
 fs.writeFile("D:/JS/NewJs-NodeJs/hello.txt", "How are you", (err) => {
   fs.readFile("D:/JS/NewJs-NodeJs/hello.txt", (err, data) => {
     if (!err) console.log(data.toString());
