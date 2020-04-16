@@ -1,16 +1,23 @@
 const express = require("express");
 const router = express.Router();
-const sqlconnection = require("./connection");
-router.get("/", (req, res) => {
-    console.log("Query");
-  sqlconnection.query("select top 1 * from alerts_details", (err, rows) => {
-    if (!err) {
-      res.send(rows);
-    } else {
-      console.log(err);
-      sqlconnection.destroy();
-    }
-  })
+const { poolPromise } = require("./connection");
+const { sql } = require("./connection");
+
+router.get("/", async (req, res) => {
+  try {
+    
+    const pool = await poolPromise;
+    const result = await pool
+      .request()
+      .input("input_parameter", sql.Numeric, req.query.id)
+      .query(
+        "select top 1 * from dbo.alerts_details where id = @input_parameter"
+      );
+    res.json(result.recordset);
+  } catch (err) {
+    res.status(500);
+    res.send(err.message);
+  }
 });
 
 module.exports = router;
