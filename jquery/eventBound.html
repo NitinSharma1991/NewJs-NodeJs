@@ -1,0 +1,23 @@
+<html>
+  <head>
+    <title></title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+    <script type="text/javascript">
+      $(document).ready(function () {
+        var jQueryObject = $("#btn");
+        var rawDOMElement = jQueryObject.get(0);
+        var eventObject = $._data(rawDOMElement, "events");
+        if (eventObject != undefined && eventObject.click != undefined) {
+          alert("Click event exists");
+        } else {
+          $("#btn").on("click", function () {
+            alert("Button Clicked");
+          });
+        }
+      });
+    </script>
+  </head>
+  <body style="font-family: Arial;">
+    <input id="btn" type="button" value="Click Me" />
+  </body>
+</html>
