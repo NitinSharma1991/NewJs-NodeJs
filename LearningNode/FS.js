@@ -6,26 +6,27 @@ const readfile = (callback) =>
     else callback(err, null);
   });
 
-// readfile((data) => {
-//   console.log(err, data);
-// });
+readfile(myfunc);
+function myfunc(err, data) {
+  console.log(err, data);
+}
 
-new Promise((resolve, reject) => {
-  readfile((err, data) => {
-    if (err == null) {
-      // fs.appendFile("hello.txt", "\n Yes data added", (err) =>
-      //   console.log('File appended')
-      // );
-      resolve(data);
-    } else reject("file reading failed");
-  });
-})
-  .then((data) => {
-    console.log(data);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
+// new Promise((resolve, reject) => {
+//   readfile((err, data) => {
+//     if (err == null) {
+//       // fs.appendFile("hello.txt", "\n Yes data added", (err) =>
+//       //   console.log('File appended')
+//       // );
+//       resolve(data);
+//     } else reject("file reading failed");
+//   });
+// })
+//   .then((data) => {
+//     console.log(data);
+//   })
+//   .catch((err) => {
+//     console.log(err);
+//   });
 
 //Folders
 

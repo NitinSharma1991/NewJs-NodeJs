@@ -23,7 +23,7 @@ app.get("/getList/:age", (req, res) => {
   console.log(req.params.age);
   //   res.json(list.filter((item) => item.age == req.params.age));
   res.set({
-    "Content-Type": "application/json",
+    "Content-Type": "application/",
     "Content-Length": "123",
     ETag: "12345",
   });
